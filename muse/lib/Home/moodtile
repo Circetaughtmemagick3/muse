@@ -1,0 +1,55 @@
+// import 'package:flutter/material.dart';
+// import 'package:firebase_database/firebase_database.dart';
+
+// class MoodTile extends StatelessWidget {
+//   final String mood;
+//   final String userId;
+
+//   MoodTile({required this.mood, required this.userId});
+
+//   @override
+//   Widget build(BuildContext context) {
+//     return StreamBuilder(
+//       stream: FirebaseDatabase.instance
+//           .ref('users/$userId/playlists/default_playlist_id/moods/$mood/songs')
+//           .onValue,
+//       builder: (context, AsyncSnapshot<DatabaseEvent> snapshot) {
+//         if (snapshot.hasData && !snapshot.hasError && snapshot.data != null) {
+//           Map<dynamic, dynamic>? songs = snapshot.data!.snapshot.value as Map?;
+          
+//           if (songs == null || songs.isEmpty) {
+//             return ListTile(
+//               title: Text('No songs in $mood mood'),
+//               tileColor: Colors.grey[800],
+//             );
+//           }
+
+//           return ListView.builder(
+//             shrinkWrap: true,
+//             physics: NeverScrollableScrollPhysics(),
+//             itemCount: songs.length,
+//             itemBuilder: (context, index) {
+//               var song = songs.values.elementAt(index);
+//               return ListTile(
+//                 title: Text(song['song'], style: TextStyle(color: Colors.white)),
+//                 subtitle: Text(song['singer'], style: TextStyle(color: Colors.white70)),
+//                 tileColor: Colors.grey[800],
+//                 trailing: Icon(Icons.music_note, color: Colors.white),
+//               );
+//             },
+//           );
+//         } else if (snapshot.hasError) {
+//           return ListTile(
+//             title: Text('Error: ${snapshot.error}'),
+//             tileColor: Colors.grey[800],
+//           );
+//         } else {
+//           return ListTile(
+//             title: Text('Loading...'),
+//             tileColor: Colors.grey[800],
+//           );
+//         }
+//       },
+//     );
+//   }
+// }
